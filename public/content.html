@@ -24,29 +24,40 @@
 <script src="/js/axios.js"></script>
 <script>
     let contentbox = document.querySelector(".content");
-    
         let str1 = window.location.href;
         let arr = str1.split("?");
         let id = arr[1];
-        axios.post("/article/content",{id}).then(data => {
-            console.log(data,"data内容");
-            let datas = data.data.article;
+        
+        
+    window.onload = function(){
+        
+        axios.get(`/article/${id}`).then(data => {
+            // console.log(data,"data内容");
+            
+            let datas = data.data.data;
+            // console.log(datas,"datas内容");
+            let arr = datas.updateTime.split("T");
+            // console.log(arr);
+            let arr0 = arr[0];
+            let arr1 = arr[1].slice(0,8);
+            // console.log(arr1);
+
             let str = `
                 <h2>${datas.title}</h2>
             <div class="content-msg">
                 <div class="content-top">
                     <div class="author">
                         作者:
-                        <span class="author-name">${datas.author}</span>
+                        <span class="author-name">${datas.author.name}</span>
                     </div>
-                    <div class="create-time">${datas.times}</div>
+                    <div class="create-time">${arr0}  ${arr1}</div>
                 </div>
                 <div class="content-details">${datas.content}</div>
             </div>
             `;
             contentbox.innerHTML = str;
         })
-    
+    }
     
 </script>
 </html>

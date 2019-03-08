@@ -37,6 +37,7 @@
     const registerbtn = document.querySelector(".btn2");
     const content = document.querySelector(".content");
     const exitbtn = document.querySelector(".btn3");
+    const item = document.querySelector(".item");
 
         axios.get("/article").then(res => {
             let data = res.data.data;
@@ -50,9 +51,10 @@
                 arr.forEach(item => {
                     tags= item.name;
                 })
+                
                 let str1 =
                     `
-                    <a href="http://localhost:3000/article/content${data[i]._id}" class="item">
+                    <a href="/content?${data[i]._id}" class="item" >
                         <div class="item-top clear-f">
                             <div class="item-left">
                                 <img src="../images/avatar1.jpg" alt="">
@@ -74,8 +76,10 @@
                         </div>
                     </a>`;
                 str += str1
+                box1.innerHTML = str;
+            
             }
-            box1.innerHTML = str;
+            
         })
     
     axios.get("/user/isLogin").then(res => {
@@ -87,7 +91,7 @@
                 <div class="right-box">
                     <div class="login-box">
                         <div class="item">
-                            <input type="text" placeholder="账号">
+                            <input type="text" placeholder="邮箱">
                         </div>
                         <div class="item">
                             <input type="password" placeholder="密码">
@@ -127,20 +131,23 @@
             password: input[1].value
         }).then(res => {
             alert(res.data.msg);
-            window.location.href = "http://localhost:3000";
+            window.location.href = "/";
         })
     }
 
     function register() {
-        window.location.href = "http://localhost:3000/register.html";
+        window.location.href = "/register.html";
     }
 
     function exit() {
         axios.get("/user/exit").then(res => {
             alert(res.data.msg);
-            window.location.href = "http://localhost:3000";
+            window.location.href = "/";
         })
     }
+
+
+
 </script>
 
 </html>

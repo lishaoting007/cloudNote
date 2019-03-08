@@ -13,7 +13,7 @@ const userSchema = new Schema({ // 定义用户的数据结构
     },
     avatar: {
         type: String,
-        default: "http://pbl.yaojunrong.com/avatar1.jpg"
+        default: "../public/images/avatar1.jpg"
     }
 }, {
     versionKey: false,

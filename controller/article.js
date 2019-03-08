@@ -8,6 +8,7 @@ router.post("/", async (req, res) => { // 发表文章的路由
     // 1. 判断用户是否登录
     // 2. 如果登录了，将数据存储到数据库，如果未登录，就告诉前端
     try {
+        
         let {
             title,
             content,
@@ -22,7 +23,7 @@ router.post("/", async (req, res) => { // 发表文章的路由
                 content,
                 contentText,
                 category,
-                author: mongoose.Types.ObjectId(req.session.user.name)
+                author: mongoose.Types.ObjectId(req.session.user._id)
             })
             res.json({
                 code: 200,
@@ -69,15 +70,20 @@ router.get("/", async (req, res, next) => {
 
 })
 
+
+
+
 router.get("/:id", async (req, res, next) => {
     try {
         const {
             id
         } = req.params;
+        
+        
         const article = await articleModel
             .findById(id)
             .populate({
-                path: "user",
+                path: "author",
                 select: "-password -email"
             })
             .populate("category")
@@ -94,9 +100,6 @@ router.get("/:id", async (req, res, next) => {
         next(err)
     }
 })
-router.get("/content", (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../public/content.html'));
-});
 
 
 module.exports = router;

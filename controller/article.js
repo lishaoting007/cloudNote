@@ -15,10 +15,10 @@ router.post("/", async (req, res) => { // 发表文章的路由
             contentText,
             category
         } = req.body;
-        category = category.map(item => mongoose.Types.ObjectId(item))
+        category = category.map(item => mongoose.Types.ObjectId(item));
         
         if (req.session.user) { // 已登录
-            await articleModel.create({
+            let aData = await articleModel.create({
                 title,
                 content,
                 contentText,
@@ -27,7 +27,8 @@ router.post("/", async (req, res) => { // 发表文章的路由
             })
             res.json({
                 code: 200,
-                msg: "文章添加成功"
+                msg: "文章添加成功",
+                data: aData
             })
         } else { // 未登录
             res.json({
@@ -59,7 +60,7 @@ router.get("/", async (req, res, next) => {
                 _id: -1
             })
             .limit(size)
-            .skip((pn - 1) * size)
+            // .skip((pn - 1) * size)
         res.json({
             code: 200,
             data: articles

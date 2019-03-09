@@ -43,7 +43,7 @@
         console.log(input[1].value);
         console.log(input[2].value);
         axios.post("/user/register",{
-            username: input[0].value,
+            name: input[0].value,
             email: input[1].value,
             password: input[2].value
         }).catch(err => {
@@ -52,7 +52,7 @@
             
             alert(data.data.msg)
         })
-        window.location.href = "http://localhost:3000";
+        window.location.href = "/index.html";
     }
 </script>
 </html>

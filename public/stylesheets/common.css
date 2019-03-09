@@ -42,12 +42,16 @@ a:hover{
     height: 50px;
     background: #409eff;
 }
+
 .wrap h1{
     margin-top: 5px;
     color: #fff;
     font-weight: 400;
     font-size: 30px;
     display: inline-block;
+}
+.wrap>h1:hover{
+    cursor:hand;
 }
 .head-btn{
     display: inline-block;

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const articleSchema = new Schema({
     title: String,
     content: String, // 存储富文本
-    contentText: String, // 存储纯文本
+    contentText: String,// 存储纯文本
     author: {
         ref: "user",
         type: Schema.Types.ObjectId

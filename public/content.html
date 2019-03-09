@@ -35,8 +35,8 @@
             // console.log(data,"data内容");
             
             let datas = data.data.data;
-            // console.log(datas,"datas内容");
-            let arr = datas.updateTime.split("T");
+            console.log(datas,"datas内容");
+            let arr = datas.createTime.split("T");
             // console.log(arr);
             let arr0 = arr[0];
             let arr1 = arr[1].slice(0,8);
@@ -49,8 +49,8 @@
                     <div class="author">
                         作者:
                         <span class="author-name">${datas.author.name}</span>
+                        <span class="create-time">${arr0}</span>
                     </div>
-                    <div class="create-time">${arr0}  ${arr1}</div>
                 </div>
                 <div class="content-details">${datas.content}</div>
             </div>

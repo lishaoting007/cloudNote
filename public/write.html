@@ -26,19 +26,19 @@
                 <div class="labels clear-f">
                     <span class="labels-title fl">标签:</span>
                     <div class="el-checkbox-group fl">
-                        <label class="check-btn clear-f" onclick="htmlClick()">
+                        <label class="check-btn clear-f" >
                             <input type="checkbox">
                             <span>HTML5</span>
                         </label>
-                        <label class="check-btn" onclick="cssClick()">
+                        <label class="check-btn" >
                             <input type="checkbox">
                             <span>CSS</span>
                         </label>
-                        <label class="check-btn" onclick="jsClick()">
+                        <label class="check-btn" >
                             <input type="checkbox">
                             <span>JavaScript</span>
                         </label>
-                        <label class="check-btn" onclick="nodeClick()">
+                        <label class="check-btn" >
                             <input type="checkbox">
                             <span>NodeJS</span>
                         </label>
@@ -60,38 +60,20 @@
     editor.create();
     let title = document.querySelector("#title");
     let btn = document.querySelector(".release");
+    let spans = document.querySelectorAll(".check-btn span");
     
-    // function htmlClick () {
-    //     let str1 = "5c7fb28b09a376120893c33e";
-    //     return str1;
-    // }
-    // function cssClick () {
-    //     let str2 = "5c7fb2b809a376120893c33f";
-    //     return str2;
-    // }
-    // function jsClick() {
-    //     let str3 = "5c7fb2c309a376120893c340";
-    //     return str3;
-    // }
-    // function nodeClick () {
-    //     let str4 = "5c7fb2d009a376120893c341";
-    //     return str4;
-    // }
-    
-    
-    
+    let arr = ["5c7fb28b09a376120893c33e", "5c7fb28b09a376120893c33e", "5c7fb2c309a376120893c340", "5c7fb2d009a376120893c341"];
 
     btn.onclick = function () {
         axios.post("/article",{
             title: title.value,
             content:editor.txt.html(),
-            contenTxet:editor.txt.text(),
-            category: "5c7fb28b09a376120893c33e"
+            contentText:editor.txt.text(),
+            category: ["5c7fb28b09a376120893c33e"]
         }).then(data => {
             alert(data.data.msg);
-            // window.location.href = "/index.html";
+            window.location.href = "/index.html";
         })
-        
     };
 </script>
 </html>

@@ -1,6 +1,8 @@
 const Router = require("express");
 const router = Router();
 const userModel = require("../model/user");
+const isEmail = require("isemail");
+
 
 
 
@@ -20,21 +22,23 @@ router.post("/register", (req, res) => {
                 data: null
             })
         } else {
-            userModel.create({
-                name,
-                password,
-                email
-            }).then(result => {
-                res.json({
-                    code: 200,
-                    msg: "注册成功"
+            if(isEmail.validate(email)){
+                userModel.create({
+                    name,
+                    password,
+                    email
+                }).then(data => {
+                    res.json({
+                        code: 200,
+                        msg: "注册成功"
+                    })
                 })
-            }).catch(err => {
+            } else {
                 res.json({
-                    code: 500,
-                    msg: err
+                    code:400,
+                    msg: "邮箱格式不正确"
                 })
-            })
+            }
         }
     })
 });

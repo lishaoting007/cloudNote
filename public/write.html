@@ -26,21 +26,21 @@
                 <div class="labels clear-f">
                     <span class="labels-title fl">标签:</span>
                     <div class="el-checkbox-group fl">
-                        <label class="check-btn clear-f" >
-                            <input type="checkbox">
-                            <span>HTML5</span>
+                        <label class="check-btn clear-f">
+                            <input type="checkbox" >
+                            <span onclick="htmlClick()">HTML5</span>
                         </label>
                         <label class="check-btn" >
                             <input type="checkbox">
-                            <span>CSS</span>
+                            <span onclick="cssClick()">CSS</span>
                         </label>
                         <label class="check-btn" >
                             <input type="checkbox">
-                            <span>JavaScript</span>
+                            <span onclick="jsClick()">JavaScript</span>
                         </label>
                         <label class="check-btn" >
                             <input type="checkbox">
-                            <span>NodeJS</span>
+                            <span onclick="nodeClick()">NodeJS</span>
                         </label>
                     </div>
                 </div>
@@ -62,18 +62,71 @@
     let btn = document.querySelector(".release");
     let spans = document.querySelectorAll(".check-btn span");
     
-    let arr = ["5c7fb28b09a376120893c33e", "5c7fb28b09a376120893c33e", "5c7fb2c309a376120893c340", "5c7fb2d009a376120893c341"];
-
+    let arr = ["5c7fb28b09a376120893c33e", "5c7fb2b809a376120893c33f", "5c7fb2c309a376120893c340", "5c7fb2d009a376120893c341"];
+    // let arr1 = ["5c83314072c6260ae4a902df", "5c83315072c6260ae4a902e0", "5c83316f72c6260ae4a902e1", "5c83318572c6260ae4a902e2"];
+    
+    
+    let id1 = arr[0];
+    let id2 = arr[1];
+    let id3 = arr[2];
+    let id4 = arr[3];
+    var category1 = "";
+    var category2 = "";
+    var category3 = "";
+    var category4 = "";
+    function htmlClick () {
+        axios.get(`/category/${id1}`).then(data => {
+            category1 = data.data.data._id;;
+        })
+        return category1;
+    }
+    function cssClick () {
+        axios.get(`/category/${id2}`).then(data => {
+            category2 = data.data.data._id;
+        })
+        return category2;
+    }
+    function jsClick () {
+        axios.get(`/category/${id3}`).then(data => {
+            category3 = data.data.data._id;;
+        })
+        return category3;
+    }
+    function nodeClick () {
+        axios.get(`/category/${id4}`).then(data => {
+            category4 = data.data.data._id;;
+        })
+        return category4;
+    }
+    
+    
+    
     btn.onclick = function () {
+        let arr2 = [category1, category2, category3, category4];
+        let arr3 = [];
+        arr2.forEach(item => {
+            if (item) {
+               arr3.push(item)
+               return arr3
+               if (arr3 == []) {
+                arr3 = ["5c7fb28b09a376120893c33e"]
+               }
+            }
+        });
+        //  console.log(arr2);
+        //  console.log(arr3);
         axios.post("/article",{
             title: title.value,
             content:editor.txt.html(),
             contentText:editor.txt.text(),
-            category: ["5c7fb28b09a376120893c33e"]
+            category: arr3
         }).then(data => {
             alert(data.data.msg);
             window.location.href = "/index.html";
         })
     };
+    
+    
+    
 </script>
 </html>

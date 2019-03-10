@@ -26,4 +26,12 @@ router.get("/", (req, res) => {
     })
 })
 
+router.get("/:id", async (req,res) => {
+    const {id} = req.params;
+    let category = await categoryModel.findById(id)
+    res.json({
+        code:200,
+        data: category
+    })
+})
 module.exports = router;
